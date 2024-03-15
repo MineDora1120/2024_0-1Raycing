@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Sprite[] wheelSpr, engineSpr;
     [SerializeField] private TextMeshPro title, subtitle, priceTitle;
 
-    private int _wheelIndex, _engineIndex, arrayIndex;
+    private int _itemIndex, arrayIndex, wheelMaxIndex = 2, engineMaxIndex = 1;
 
     private string[]
     wheelNamed = new string[] { "산악 전용 바퀴", "사막 전용 바퀴", "도심 전용 바퀴" },
@@ -26,14 +26,26 @@ public class ShopManager : MonoBehaviour
     {
         shopObj.SetActive(GameManager.isShopOpen);
         _buyButtonText = buyButton.GetComponentInChildren<TextMeshPro>();
+        ArrayReset();
     }
 
-    void 
+    private void Update()
+    {
+        title.text = (arrayIndex == 0) ? wheelNamed[_itemIndex] : engineNamed[_itemIndex];
+        subtitle.text = (arrayIndex == 0) ? wheelNotice[_itemIndex] : engineNotice[_itemIndex];
+    }
+
+    void ArrayReset()
+    {
+        _itemIndex = 0;
+        arrayIndex = 0;
+    }
 
     public void ClickArrowButton(bool type)
     {
         //type이 true면 오른쪽, false면 왼쪽
-       if(type) 
+        if (type) _itemIndex++;
+        else _itemIndex--;
     }
 
     // Update is called once per frame
