@@ -23,9 +23,16 @@ public class CarManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (GameManager.isShopOpen)
+        {
+            CarBreak(20000 * speed);
+        }
+
         AutoBreak();
         RotateWheels();
         WheelObjRotate();
+
+        Debug.Log(_rb.velocity.magnitude);
     }
 
     void WheelObjRotate()
@@ -56,13 +63,13 @@ public class CarManager : MonoBehaviour
 
     void AutoBreak()
     {
-        if (Input.GetAxis("Vertical") != _tmpWheelDir)
-        {
-
-            if (_rb.velocity.magnitude > 5) CarBreak(speed * 20000);
-            else _tmpWheelDir = Input.GetAxis("Vertical");
-
-        }
+        if (Input.GetAxis("Vertical") != _tmpWheelDir) BreakSpecialValue(1);
         else if (Input.GetAxis("Vertical") == _tmpWheelDir) CarBreak(0);
+    }
+
+    public void BreakSpecialValue(float maxValue)
+    {
+        if (_rb.velocity.magnitude > maxValue) CarBreak(speed * 20000);
+        else _tmpWheelDir = Input.GetAxis("Vertical");
     }
 }
