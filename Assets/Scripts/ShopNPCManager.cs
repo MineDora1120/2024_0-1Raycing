@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ShopNPCManager : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
     [SerializeField] private GameObject _npc;
     [SerializeField] private Vector3 _house;
     private Animator _anim;
