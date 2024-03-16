@@ -47,13 +47,13 @@ public class ShopNPCManager : MonoBehaviour
 
     IEnumerator OnCarMove(GameObject _gm)
     {
-        while (Vector3.Distance(_npc.transform.position, _gm.transform.position) > 4f)
+        while (Vector3.Distance(_npc.transform.position, _gm.transform.position) > 4.5f)
         {
             _npc.transform.LookAt(_npc.transform.position);
 
             Vector3 _direction = (_gm.transform.position - _npc.transform.position).normalized;
 
-            _npc.transform.position += _direction * Time.deltaTime * 10;
+            _npc.transform.position += _direction * Time.deltaTime * 2;
 
             _anim.SetBool("IsRun", true);
 
@@ -70,7 +70,7 @@ public class ShopNPCManager : MonoBehaviour
 
             Vector3 _direction = (_house - _npc.transform.position).normalized;
 
-            _npc.transform.position += _direction * Time.deltaTime;
+            _npc.transform.position += _direction * Time.deltaTime * 2; 
 
             _anim.SetBool("IsRun", true);
             GameManager.isShopOpen = false;

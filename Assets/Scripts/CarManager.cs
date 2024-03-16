@@ -24,12 +24,11 @@ public class CarManager : MonoBehaviour
     void FixedUpdate()
     {
         if (GameManager.isShopOpen) CarBreak(20000);
+        if (!InGameManager.isGameStart) _rb.velocity = Vector3.zero;
 
         AutoBreak();
         RotateWheels();
         WheelObjRotate();
-
-        Debug.Log(_rb.velocity.magnitude);
 
     }
 
@@ -44,6 +43,8 @@ public class CarManager : MonoBehaviour
 
     void RotateWheels()
     {
+        if (!InGameManager.isGameStart) return;
+
         for(int i = 0; i < 4; i++)
         {
             if (i < 2) wheelColliders[i].steerAngle = wheelDir * Input.GetAxis("Horizontal");
