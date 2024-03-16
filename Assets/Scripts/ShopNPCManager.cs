@@ -22,7 +22,7 @@ public class ShopNPCManager : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerCollider"))
         {
             StopAllCoroutines();
             StartCoroutine(OnCarMove(other.gameObject));
@@ -31,12 +31,12 @@ public class ShopNPCManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player")) GameManager.isShopOpen = true;
+        if (other.CompareTag("PlayerCollider")) GameManager.isShopOpen = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("PlayerCollider"))
         {
             StopAllCoroutines();
             StartCoroutine(OnBackMoveDown());
@@ -45,13 +45,13 @@ public class ShopNPCManager : MonoBehaviour
 
     IEnumerator OnCarMove(GameObject _gm)
     {
-        while (Vector3.Distance(_npc.transform.position, _gm.transform.position) > 1.5f)
+        while (Vector3.Distance(_npc.transform.position, _gm.transform.position) > 4f)
         {
             _npc.transform.LookAt(_npc.transform.position);
 
             Vector3 _direction = (_gm.transform.position - _npc.transform.position).normalized;
 
-            _npc.transform.position += _direction * Time.deltaTime;
+            _npc.transform.position += _direction * Time.deltaTime * 10;
 
             _anim.SetBool("IsRun", true);
 
