@@ -8,10 +8,11 @@ public class ShopNPCManager : MonoBehaviour
     [SerializeField] private GameObject _npc;
     [SerializeField] private Vector3 _house;
     private Animator _anim;
-
+    private Rigidbody _playerRB;
     private void Start()
     {
         _anim = _npc.GetComponent<Animator>();
+        _playerRB = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -26,6 +27,7 @@ public class ShopNPCManager : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(OnCarMove(other.gameObject));
+            _playerRB.velocity = Vector3.zero;
         }
     }
 

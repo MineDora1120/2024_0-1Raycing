@@ -30,6 +30,7 @@ public class CarManager : MonoBehaviour
         WheelObjRotate();
 
         Debug.Log(_rb.velocity.magnitude);
+
     }
 
     void WheelObjRotate()
