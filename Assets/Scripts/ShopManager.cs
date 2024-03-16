@@ -1,19 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private GameObject shopObj;
     [SerializeField] private Button leftArrow, rightArrow, buyButton, wheelButton, engineButton;
     [SerializeField] private Image imageShow;
-    [SerializeField] private Sprite[] wheelSpr, engineSpr;
+    [SerializeField] private Sprite[] wheelSpr, engineSpr, buttonList;
     [SerializeField] private TextMeshProUGUI title, subtitle, priceTitle, userPrice, userEngine, userWheel;
 
-    private int _itemIndex, arrayIndex;
+    private int _itemIndex, arrayIndex, _price;
     private RectTransform _wheelButtonTransform, _engineButtonTransform;
+    private string _name, _notice;
+    private bool changePriceText = false;
+
+    enum ButtonType
+    {
+        Yello,
+        Blue,
+        Green
+    };
 
     private string[]
     wheelNamed = new string[] { "사막 전용 바퀴", "산악 전용 바퀴", "도심 전용 바퀴" },
@@ -34,9 +42,9 @@ public class ShopManager : MonoBehaviour
         _engineButtonTransform = engineButton.GetComponentInChildren<RectTransform>();
 
         ArrayReset();
-        StartCoroutine(ChangeText());
 
         arrayIndex = 0;
+        changePriceText = false;
     }
 
     private void Update()
@@ -44,34 +52,59 @@ public class ShopManager : MonoBehaviour
         if (GameManager.isShopOpen) shopObj.SetActive(true);
         else shopObj.SetActive(false);
 
-        userPrice.text = "<sprite=4>" + GameManager.coin;
-        userEngine.text = GameManager.engineType.ToString() + "기통 엔진 사용중";
-        userWheel.text = (GameManager.wheelType == 0) ? "기본 바퀴 사용중" : wheelNamed[GameManager.wheelType-1] + " 사용중";
+        _name = (arrayIndex == 0) ? wheelNamed[_itemIndex] : engineNamed[_itemIndex];
+        _notice = (arrayIndex == 0) ? wheelNotice[_itemIndex] : engineNotice[_itemIndex];
+        _price = ((arrayIndex == 0) ? wheelItemPrices[_itemIndex] : engineItemPrices[_itemIndex]);
 
         UpdateButtonPos();
         ArrrowLimit();
+        SubText();
+        ButtonChange();
+        ChangeText();
     }
 
-    IEnumerator ChangeText()
+    void ChangeText()
     {
-        while (true)
-        {
-            title.text = (arrayIndex == 0) ? wheelNamed[_itemIndex] : engineNamed[_itemIndex];
-            subtitle.text = (arrayIndex == 0) ? wheelNotice[_itemIndex] : engineNotice[_itemIndex];
-            priceTitle.text = "<sprite=8>" + ((arrayIndex == 0) ? wheelItemPrices[_itemIndex] : engineItemPrices[_itemIndex]);
+            title.text = _name;
+            subtitle.text = _notice;
+            if(!changePriceText) priceTitle.text = "<sprite=8>" + _price;
 
             imageShow.sprite = (arrayIndex == 0) ? wheelSpr[_itemIndex] : engineSpr[_itemIndex];
+    }
 
-            yield return null;
+    void SubText()
+    {
+        userPrice.text = "<sprite=4>" + GameManager.coin;
+        userEngine.text = GameManager.engineType.ToString() + "기통 엔진 사용중";
+        userWheel.text = (GameManager.wheelType == 4) ? "기본 바퀴 사용중" : wheelNamed[GameManager.wheelType] + " 사용중";
+    }
+
+    void ButtonChange()
+    {
+        int[] _arr = (arrayIndex == 0) ? GameManager.wheelItemList : GameManager.engineItemList;
+        int type = (arrayIndex == 0) ? GameManager.wheelType : GameManager.engineType;
+
+        if (_arr[_itemIndex] == 1)
+        {
+            if (type == ((arrayIndex == 0) ? _itemIndex : ConvertEngineType(_itemIndex))) BuyButtonTextBoxType("해제", ButtonType.Green);
+            else BuyButtonTextBoxType("적용", ButtonType.Blue);
         }
+
+        else BuyButtonTextBoxType("구입", ButtonType.Yello);
+    }
+
+    void BuyButtonTextBoxType(string _str, ButtonType type)
+    {
+        buyButton.image.sprite = buttonList[((int)type)];
+        _buyButtonText.text = _str;
     }
 
     IEnumerator NoMoneyPrices()
     {
-        StopCoroutine(ChangeText());
+        changePriceText = true;
         priceTitle.text = "돈이 부족합니다.";
         yield return new WaitForSeconds(0.5f);
-        StartCoroutine(ChangeText());
+        changePriceText = false;
     }
 
     void ArrrowLimit()
@@ -88,7 +121,7 @@ public class ShopManager : MonoBehaviour
         if (arrayIndex == 0) _wheelButtonTransform.anchoredPosition = new Vector3(-60, 388, 0);
         else _wheelButtonTransform.anchoredPosition = new Vector3(-97, 388, 0);
 
-        if(arrayIndex == 1) _engineButtonTransform.anchoredPosition = new Vector3(-60, 247, 0);
+        if (arrayIndex == 1) _engineButtonTransform.anchoredPosition = new Vector3(-60, 247, 0);
         else _engineButtonTransform.anchoredPosition = new Vector3(-97, 247, 0);
     }
 
@@ -102,6 +135,32 @@ public class ShopManager : MonoBehaviour
         //type이 true면 오른쪽, false면 왼쪽
         if (type) _itemIndex++;
         else _itemIndex--;
+    }
+
+    public void ClickBuyButton()
+    {
+        int[] _arr = (arrayIndex == 0) ? GameManager.wheelItemList : GameManager.engineItemList;
+
+        if (_arr[_itemIndex] == 1)
+        {
+            if (arrayIndex == 0) GameManager.wheelType = (GameManager.wheelType == _itemIndex) ? 4 : _itemIndex;
+            else if (arrayIndex == 1) GameManager.engineType = (GameManager.engineType == ConvertEngineType(_itemIndex)) ? 4 : ConvertEngineType(_itemIndex);
+        }
+
+        else if (_price > GameManager.coin) StartCoroutine(NoMoneyPrices());
+
+        else
+        {
+            GameManager.coin -= _price;
+
+            if (arrayIndex == 0) GameManager.wheelItemList[_itemIndex] = 1;
+            else if (arrayIndex == 1) GameManager.engineItemList[_itemIndex] = 1;
+        }
+    }
+
+    int ConvertEngineType(int _index)
+    {
+        return (_index * 2) + 6;
     }
 
     public void ClickTypeButton(int type)
