@@ -23,10 +23,7 @@ public class CarManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (GameManager.isShopOpen)
-        {
-            CarBreak(20000 * speed);
-        }
+        if (GameManager.isShopOpen) CarBreak(20000);
 
         AutoBreak();
         RotateWheels();
