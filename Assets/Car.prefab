@@ -275,7 +275,7 @@ MonoBehaviour:
   - {fileID: 8308370243855989047}
   - {fileID: 1130689849272055323}
   - {fileID: 1363604084189636058}
-  speed: 1000
+  speed: 350
   wheelDir: 40
 --- !u!1 &2007505744184739577
 GameObject:
