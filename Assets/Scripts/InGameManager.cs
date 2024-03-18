@@ -12,12 +12,13 @@ public class InGameManager : MonoBehaviour
     private int count = 5;
 
     private Vector2 _vec;
-    private float _scaleSpeed, deltaTime;
+    private float _scaleSpeed, deltaTime, _oneBornTime;
 
     // Start is called before the first frame update
     void Start()
     {
         deltaTime = 0;
+        _oneBornTime = 120;
 
         count = 5;
         _scaleSpeed = 50f;
@@ -28,12 +29,18 @@ public class InGameManager : MonoBehaviour
     private void Update()
     {
         _countText.transform.localScale = Vector2.Lerp(_vec, _countText.transform.localScale, Time.deltaTime * _scaleSpeed);
-        _timeText.text = (int)(deltaTime / 60) + ":" + (int)(deltaTime % 60);
+        _timeText.text = (int)(_oneBornTime / 60) + ":" + (int)(_oneBornTime % 60);
     }
 
     private void FixedUpdate()
     {
-        if(isGameStart && !GameManager.isShopOpen) deltaTime += Time.deltaTime;  
+        if (isGameStart && !GameManager.isShopOpen)
+        {
+            deltaTime += Time.deltaTime;
+            _oneBornTime -= Time.deltaTime;
+
+            if(_oneBornTime <= 0) GameOverType("Ai");
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +54,8 @@ public class InGameManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             _vec = new Vector3(0, 0);
             yield return new WaitForSeconds(0.5f);
+
+            _countText.transform.localScale = Vector3.zero;
             _countText.color = Random.ColorHSV();
         }
 
@@ -58,12 +67,23 @@ public class InGameManager : MonoBehaviour
     {
         if (!isGameStart) return;
         _scaleSpeed = 50;
-        if (other.gameObject.CompareTag("PlayerCollider"))
+        if (other.gameObject.CompareTag("PlayerCollider")) GameOverType("Player");
+        else GameOverType("Ai");
+    }
+
+
+    void GameOverType(string type)
+    {
+        if (type == "Player")
         {
             _countText.text = "Win!";
             _countText.color = Color.green;
             _vec = new Vector3(1, 1);
-        } else
+
+            GameManager.coin += GameManager.sumCoin;
+            GameManager.sumCoin = 0;
+        }
+        else
         {
             _countText.text = "Fail!";
             _countText.color = Color.yellow;

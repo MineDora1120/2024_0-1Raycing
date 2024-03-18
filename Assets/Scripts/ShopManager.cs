@@ -74,7 +74,7 @@ public class ShopManager : MonoBehaviour
 
     void SubText()
     {
-        userPrice.text = "<sprite=4>" + GameManager.coin;
+        userPrice.text = "<sprite=4>" + (GameManager.coin + " + <color=red>" + GameManager.sumCoin);
         userEngine.text = GameManager.engineType.ToString() + "기통 엔진 사용중";
         userWheel.text = (GameManager.wheelType == 4) ? "기본 바퀴 사용중" : wheelNamed[GameManager.wheelType] + " 사용중";
     }

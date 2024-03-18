@@ -27,7 +27,7 @@ public class EnemyMoeManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (GameManager.isShopOpen || !InGameManager.isGameStart) _nav.speed = 0;
-        else _nav.speed = _playerRb.velocity.magnitude * Random.Range(0.8f, 1f) + 1;
+        else _nav.speed = _playerRb.velocity.magnitude * Random.Range(0.8f, 1f) + Random.Range(0.1f, 1f);
 
         foreach(GameObject wheel in _wheelObj)
         {

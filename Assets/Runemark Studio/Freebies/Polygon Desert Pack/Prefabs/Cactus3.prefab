@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413554}
   - component: {fileID: 3592805294830232270}
+  - component: {fileID: -5466276494649398141}
   m_Layer: 0
   m_Name: Cactus3
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.33, y: 0, z: -8.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 6.82, y: 6.82, z: 6.82}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 419098}
   m_Father: {fileID: 0}
@@ -52,10 +53,40 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.94
+  m_Radius: 0.73
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.52, z: 0}
+--- !u!205 &-5466276494649398141
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114448}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.65519285, z: 0.00000023841858}
+  m_Size: 1.5626833
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324206}
+    - renderer: {fileID: 2393136}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324206}
+    - renderer: {fileID: 2393136}
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 2324206}
+    - renderer: {fileID: 2393136}
+  m_Enabled: 1
 --- !u!1 &118890
 GameObject:
   m_ObjectHideFlags: 0

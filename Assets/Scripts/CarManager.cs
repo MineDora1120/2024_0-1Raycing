@@ -18,6 +18,7 @@ public class CarManager : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.centerOfMass = Vector3.zero;
+
     }
 
     // Update is called once per frame
@@ -30,6 +31,8 @@ public class CarManager : MonoBehaviour
         RotateWheels();
         WheelObjRotate();
 
+        speed += GameManager.engineType*100;
+        if (GameManager.sceneIndex == GameManager.wheelType) _rb.AddForce(transform.TransformDirection(Vector3.forward) * GameManager.engineType * Input.GetAxis("Vertical") * 5, ForceMode.Impulse);
     }
 
     void WheelObjRotate()
