@@ -21,12 +21,13 @@ public class JSONManager : MonoBehaviour
 
     void Start()
     {
-        filePath = Application.persistentDataPath;
+        DataSetting();
     }
 
     void DataSetting()
     {
-        for(int i = 0; i < 3; i++)
+        filePath = Application.persistentDataPath;
+        for (int i = 0; i < 3; i++)
         {
             if(File.Exists(filePath + fileName[i]))
             {
@@ -34,7 +35,12 @@ public class JSONManager : MonoBehaviour
                 _rankData[i] = JsonUtility.FromJson<List<PlayerData>>(json);
             } else
             {
-                
+                for(int j = 0; j < 5; j++)
+                {
+                    _rankData.Add(new List<PlayerData>());
+                }
+
+                File.WriteAllText(filePath + fileName[i], JsonUtility.ToJson(_rankData[i]));
             }
         }
     }
