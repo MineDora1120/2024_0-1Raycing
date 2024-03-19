@@ -3,34 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class JSONManager : MonoBehaviour
 {
     [System.Serializable]
     public class PlayerData
     {
-        public string playerName;
-        public int playerLevel;
-        public float playerHealth;
+        public float time;
+        public int score;
     }
+     
+    public static List<List<PlayerData>> _rankData;
+
+    private string[] fileName = { "/desert.json", "/mountain.json", "/city.json" };
+    string filePath;
 
     void Start()
     {
-        // 저장할 데이터 생성
-        PlayerData player = new PlayerData();
-        player.playerName = "Player1";
-        player.playerLevel = 10;
-        player.playerHealth = 100f;
+        filePath = Application.persistentDataPath;
+    }
 
-        // 데이터를 JSON 문자열로 직렬화
-        string json = JsonUtility.ToJson(player);
-
-        // 파일 경로 지정 (Application.persistentDataPath를 사용하면 플랫폼에 따라 저장 위치가 다르게 설정됩니다.)
-        string filePath = Application.persistentDataPath + "/playerData.json";
-
-        // JSON 파일로 저장
-        File.WriteAllText(filePath, json);
-
-        Debug.Log("Player data saved to: " + filePath);
+    void DataSetting()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            if(File.Exists(filePath + fileName[i]))
+            {
+                string json = File.ReadAllText(filePath+ fileName[i]);
+                _rankData[i] = JsonUtility.FromJson<List<PlayerData>>(json);
+            } else
+            {
+                
+            }
+        }
     }
 }
