@@ -7,6 +7,7 @@ using TMPro;
 public class InGameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _countText, _timeText;
+    [SerializeField] private Scrollbar _percentBar;
 
     public static bool isGameStart = false;
     private int count = 5;
@@ -30,6 +31,7 @@ public class InGameManager : MonoBehaviour
     {
         _countText.transform.localScale = Vector2.Lerp(_vec, _countText.transform.localScale, Time.deltaTime * _scaleSpeed);
         _timeText.text = (int)(_oneBornTime / 60) + ":" + (int)(_oneBornTime % 60);
+        _percentBar.size = _oneBornTime / 120;
     }
 
     private void FixedUpdate()

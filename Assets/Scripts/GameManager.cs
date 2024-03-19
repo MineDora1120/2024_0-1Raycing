@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.F5)) InGameManager.isGameStart = !InGameManager.isGameStart;
 
-        Debug.Log(InGameManager.isGameStart);
 
         cheatShop.SetActive(isCheatShopOpen);
     }
