@@ -147,11 +147,11 @@ public class ShopManager : MonoBehaviour
             else if (arrayIndex == 1) GameManager.engineType = (GameManager.engineType == ConvertEngineType(_itemIndex)) ? 4 : ConvertEngineType(_itemIndex);
         }
 
-        else if (_price > GameManager.coin) StartCoroutine(NoMoneyPrices());
+        else if (_price > GameManager.coin && !GameManager.isCheat) StartCoroutine(NoMoneyPrices());
 
         else
         {
-            GameManager.coin -= _price;
+            if(!GameManager.isCheat) GameManager.coin -= _price;
 
             if (arrayIndex == 0) GameManager.wheelItemList[_itemIndex] = 1;
             else if (arrayIndex == 1) GameManager.engineItemList[_itemIndex] = 1;
