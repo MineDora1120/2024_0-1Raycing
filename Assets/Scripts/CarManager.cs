@@ -30,8 +30,6 @@ public class CarManager : MonoBehaviour
         AutoBreak();
         RotateWheels();
         WheelObjRotate();
-
-        speed += GameManager.engineType*100;
         if (GameManager.sceneIndex == GameManager.wheelType) _rb.AddForce(transform.TransformDirection(Vector3.forward) * GameManager.engineType * Input.GetAxis("Vertical") * 5, ForceMode.Impulse);
     }
 
@@ -50,8 +48,8 @@ public class CarManager : MonoBehaviour
 
         for(int i = 0; i < 4; i++)
         {
-            if (i < 2) wheelColliders[i].steerAngle = wheelDir * Input.GetAxis("Horizontal");
-            else wheelColliders[i].motorTorque = speed * Input.GetAxis("Vertical");
+            if (i < 2) wheelColliders[i].steerAngle =  wheelDir * Input.GetAxis("Horizontal");
+            else wheelColliders[i].motorTorque = GameManager.engineType * speed * Input.GetAxis("Vertical");
         }
     }
 
