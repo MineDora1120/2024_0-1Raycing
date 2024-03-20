@@ -6,26 +6,46 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using System.Linq;
 
+
+[System.Serializable]
+public class PlayerData
+{
+    public int time;
+    public int score;
+}
+[System.Serializable]
+public class WriteData
+{
+    public PlayerData[] rank;
+}
 public class JSONManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class PlayerData
-    {
-        public int time;
-        public int score;
-    }
-    [System.Serializable]
-    public class WriteData
-    {
-        public PlayerData[] rank;
-    }
-
-
     public static List<List<PlayerData>> _rankData = new List<List<PlayerData>>();
 
-    string[] fileName = { "/desert.json", "/mountain.json", "/city.json" };
-    string filePath;
+    public static string[] fileName = { "/desert.json", "/mountain.json", "/city.json" };
+    public static string filePath;
 
+
+    void Start()
+    {
+        //DataSetting();
+
+        PlayerData _testPlayerData = new PlayerData();
+
+        _testPlayerData.time = 1;
+        _testPlayerData.score = 1;
+
+        for (int i = 0; i < 3; i++)
+        {
+            _rankData.Add(new List<PlayerData>());
+            for (int j = 0; j < 5; j++)
+            {
+                _rankData[i].Add(_testPlayerData);
+            }
+        }
+
+        DataSetting();
+    }
 
     //private void Awake()
     //{
@@ -37,7 +57,7 @@ public class JSONManager : MonoBehaviour
     //    SaveRank();
     //}
 
-    void DataSetting()
+    public static void DataSetting()
     {
         filePath = Application.persistentDataPath;
         for (int i = 0; i < 3; i++)
@@ -77,7 +97,7 @@ public class JSONManager : MonoBehaviour
     //    }
     //}
 
-    void SaveRank()
+    public static void SaveRank()
     {
         filePath = Application.persistentDataPath;
         for (int i = 0; i < 3; i++)

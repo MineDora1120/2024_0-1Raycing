@@ -84,7 +84,7 @@ public class InGameManager : MonoBehaviour
 
             GameManager.coin += GameManager.sumCoin;
             GameManager.sumCoin = 0;
-            //SumRank();
+            SumRank();
         }
         else
         {
@@ -95,26 +95,27 @@ public class InGameManager : MonoBehaviour
         isGameStart = false;
     }
 
-    //void SumRank()
-    //{
-    //    int i, index;
-    //    float score, time;
+    void SumRank()
+    {
+        int i, index;
+        float score, time;
 
-    //    score = (_oneBornTime / 120) * 100;
-    //    time = deltaTime;
-    //    index = GameManager.sceneIndex;
+        score = (_oneBornTime / 120) * 100;
+        time = deltaTime;
+        index = GameManager.sceneIndex;
 
-    //    for (i = 4; i >= 0; i--) {
-    //        if (JSONManager._rankData[index][i].score >= score) break;
-    //    }
+        for (i = 4; i > 0; i--)
+        {
+            if (JSONManager._rankData[index][i].score >= score) break;
+        }
 
-    //    PlayerData _tmpDB = new PlayerData();
+        PlayerData _tmpDB = new PlayerData();
 
-    //    _tmpDB.time = time;
-    //    _tmpDB.score = score;
+        _tmpDB.time = (int)time;
+        _tmpDB.score = (int)score;
 
-    //    JSONManager._rankData[index][i] = _tmpDB;
+        JSONManager._rankData[index][i] = _tmpDB;
 
-    //    JSONManager.SaveRank();
-    //}
+        JSONManager.SaveRank();
+    }
 }

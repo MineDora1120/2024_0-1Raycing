@@ -2218,6 +2218,7 @@ GameObject:
   - component: {fileID: 5492669149752987612}
   - component: {fileID: 181055103487585908}
   - component: {fileID: 5492669149752987613}
+  - component: {fileID: 5492669149752987614}
   m_Layer: 0
   m_Name: Free Racing Car
   m_TagString: Untagged
@@ -2315,6 +2316,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7298005419642317371, guid: 5a4b964910a11e44289270f8231cddc4, type: 3}
+      propertyPath: m_Mass
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298005419642317371, guid: 5a4b964910a11e44289270f8231cddc4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7708188603232616486, guid: 5a4b964910a11e44289270f8231cddc4, type: 3}
       propertyPath: m_Name
       value: AIEnemy
@@ -2389,6 +2398,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!208 &5492669149752987614
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5148232098183009638}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.89, y: 0.63, z: 2.125}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.71, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5535961926753614787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,6 +5167,7 @@ GameObject:
   - component: {fileID: 8665988941131789412}
   - component: {fileID: 3961226839791211980}
   - component: {fileID: 8665988941131789413}
+  - component: {fileID: 8665988941131789414}
   m_Layer: 0
   m_Name: Free Racing Car Purple Variant
   m_TagString: Untagged
@@ -5273,6 +5299,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!208 &8665988941131789414
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288901139885190878}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.89, y: 0.63, z: 2.125}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.71, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8694645964107268219
 GameObject:
   m_ObjectHideFlags: 0
