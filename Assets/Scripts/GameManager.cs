@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static int[] wheelItemList = new int[3] { 0, 0, 0 }, engineItemList = new int[2] { 0, 0 };
 
     [SerializeField] private GameObject cheatShop;
-    private void Start()
+    private void Awake()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         isShopOpen = false;

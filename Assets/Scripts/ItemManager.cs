@@ -11,7 +11,7 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rand = Random.Range(0, 5);
+        _rand = Random.Range(0, 6);
         _rb = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
     }
 
@@ -41,6 +41,9 @@ public class ItemManager : MonoBehaviour
                     break;
                 case 4:
                     _rb.AddForce(_rbVec * 10000, ForceMode.Impulse);
+                    break;
+                case 5:
+                    GameManager.isShopOpen = true;
                     break;
 
             }

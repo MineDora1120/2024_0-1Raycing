@@ -158,6 +158,10 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void CancelButton()
+    {
+        GameManager.isShopOpen = false;
+    }
     int ConvertEngineType(int _index)
     {
         return (_index * 2) + 6;
