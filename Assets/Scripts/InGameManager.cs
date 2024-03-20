@@ -9,6 +9,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _countText, _timeText;
     [SerializeField] private Scrollbar _percentBar;
 
+    private int[] sceneCount = { 120, 180, 210 };
     public static bool isGameStart = false;
     private int count = 5;
 
@@ -19,7 +20,7 @@ public class InGameManager : MonoBehaviour
     void Start()
     {
         deltaTime = 0;
-        _oneBornTime = 120;
+        _oneBornTime = sceneCount[GameManager.sceneIndex];
 
         count = 5;
         _scaleSpeed = 50f;
@@ -31,7 +32,7 @@ public class InGameManager : MonoBehaviour
     {
         _countText.transform.localScale = Vector2.Lerp(_vec, _countText.transform.localScale, Time.deltaTime * _scaleSpeed);
         _timeText.text = (int)(_oneBornTime / 60) + ":" + (int)(_oneBornTime % 60);
-        _percentBar.size = _oneBornTime / 120;
+        _percentBar.size = _oneBornTime / sceneCount[GameManager.sceneIndex];
     }
 
     private void FixedUpdate()
@@ -91,6 +92,7 @@ public class InGameManager : MonoBehaviour
             _countText.text = "Fail!";
             _countText.color = Color.yellow;
             _vec = new Vector3(1, 1);
+            _scaleSpeed = 50;
         }
         isGameStart = false;
     }
