@@ -4,26 +4,26 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-
-
-[System.Serializable]
-public class PlayerData
-{
-    public float time;
-    public int score;
-}
-public class WriteData
-{
-    public PlayerData[] rank;
-}
+using System.Linq;
 
 public class JSONManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class PlayerData
+    {
+        public int time;
+        public int score;
+    }
+    [System.Serializable]
+    public class WriteData
+    {
+        public PlayerData[] rank;
+    }
 
 
     public static List<List<PlayerData>> _rankData = new List<List<PlayerData>>();
 
-    private string[] fileName = { "/desert.json", "/mountain.json", "/city.json" };
+    string[] fileName = { "/desert.json", "/mountain.json", "/city.json" };
     string filePath;
 
 
@@ -36,31 +36,6 @@ public class JSONManager : MonoBehaviour
     //    _rankData.Add(new List<PlayerData>() { eekta });
     //    SaveRank();
     //}
-    void Start()
-    {
-        //DataSetting();
-
-        PlayerData _testPlayerData = new PlayerData();
-
-        _testPlayerData.time = 0.5f;
-        _testPlayerData.score = 5;
-
-        for (int i = 0; i < 3; i++)
-        {
-            _rankData.Add(new List<PlayerData>());
-            for (int j = 0; j < 5; j++)
-            {
-                _rankData[i].Add(_testPlayerData);
-            }
-        }
-
-        DataSetting();
-    }
-
-    private void Update()
-    {
-        
-    }
 
     void DataSetting()
     {
@@ -72,7 +47,7 @@ public class JSONManager : MonoBehaviour
                 string json = File.ReadAllText(filePath+ fileName[i]);
 
                 WriteData rankDataList = JsonUtility.FromJson<WriteData>(json);
-                
+
                 for(int j = 0; j < 5; j++)
                 {
                     _rankData[i][j] = rankDataList.rank[j];
@@ -85,20 +60,46 @@ public class JSONManager : MonoBehaviour
         }
     }
 
+    //void SaveRank()
+    //{
+    //    filePath = Application.persistentDataPath;
+    //
+    //    for (int i = 0; i < 3; i++)
+    //    {
+    //       _tmpStr = "{ \"rank\": [";
+    //        for (int j = 0; j < 5; j++)
+    //        {
+    //            _tmpStr += JsonUtility.ToJson(_rankData[i][j]) + ((j < 4) ? "," : "]");
+    //        }
+    //        _tmpStr += "}";
+    //        File.Delete(filePath + fileName[i]);
+    //        File.WriteAllText(filePath + fileName[i], _tmpStr);
+    //    }
+    //}
+
     void SaveRank()
     {
         filePath = Application.persistentDataPath;
-        string _tmpStr = "[";
         for (int i = 0; i < 3; i++)
         {
-            _tmpStr = "{ \"rank\": [";
-            for (int j = 0; j < 5; j++)
+            WriteData _tmpDB = new WriteData();
+            _tmpDB.rank = new PlayerData[5];
+
+            for(int j = 0; j < 5; j++)
             {
-                _tmpStr += JsonUtility.ToJson(_rankData[i][j]) + ((j < 4) ? "," : "]");
+                _tmpDB.rank[j] = _rankData[i][j];
             }
-            _tmpStr += "}";
-            File.Delete(filePath + fileName[i]);
-            File.WriteAllText(filePath + fileName[i], _tmpStr);
+            File.WriteAllText(filePath + fileName[i], JsonUtility.ToJson(_tmpDB));
+        }
+    }
+
+
+    void SortList()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            //_rankData[i] = _rankData[i].OrderBy(o => o.score).ToList();
+            _rankData[i] = _rankData[i].OrderByDescending(o => o.score).ToList();
         }
     }
 }

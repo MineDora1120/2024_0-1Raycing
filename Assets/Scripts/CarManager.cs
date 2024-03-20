@@ -30,7 +30,7 @@ public class CarManager : MonoBehaviour
         AutoBreak();
         RotateWheels();
         WheelObjRotate();
-        if (GameManager.sceneIndex == GameManager.wheelType) _rb.AddForce(transform.TransformDirection(Vector3.forward) * GameManager.engineType * Input.GetAxis("Vertical") * 2, ForceMode.Impulse);
+        if (GameManager.sceneIndex == GameManager.wheelType+1) _rb.AddForce(transform.TransformDirection(Vector3.forward) * GameManager.engineType * Input.GetAxis("Vertical") * 2, ForceMode.Impulse);
     }
 
     void WheelObjRotate()
