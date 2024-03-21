@@ -22,10 +22,19 @@ public class MainManager : MonoBehaviour
         _status.SetActive(!isActiveWindow);
     }
 
-    void RankText()
-    {
+    //void RankText()
+    //{
+    //    string _tmpStr = "";
 
-    }
+    //    for(int i = 0; i < 3; i++)
+    //    {
+    //        _tmpStr += ""
+    //        for(int j = 0; j < 5; j++)
+    //        {
+    //            _tmpStr += 
+    //        }
+    //    }
+    //}
 
     public void OnMenuButtonClick(int type)
     {
