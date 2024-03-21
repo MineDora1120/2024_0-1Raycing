@@ -37,7 +37,7 @@ public class InGameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGameStart && !GameManager.isShopOpen)
+        if (isGameStart)
         {
             deltaTime += Time.deltaTime;
             _oneBornTime -= Time.deltaTime;
@@ -104,7 +104,7 @@ public class InGameManager : MonoBehaviour
 
         score = (_oneBornTime / 120) * 100;
         time = deltaTime;
-        index = GameManager.sceneIndex;
+        index = GameManager.sceneIndex-1;
 
         for (i = 4; i > 0; i--)
         {

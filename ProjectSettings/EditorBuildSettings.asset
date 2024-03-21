@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Shop.unity
-    guid: 053608e7eb17ebc47b487bae0f6753de
+    path: Assets/Scenes/Main.unity
+    guid: 01e62dd4d06b9604aa6efe5f4e79066e
   - enabled: 1
     path: Assets/Scenes/Desert.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab

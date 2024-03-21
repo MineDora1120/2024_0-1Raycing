@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static bool isShopOpen = false, isCheatShopOpen = false, isCheat = false;
-    public static int coin = 100000000, sumCoin = 0, engineType = 4, wheelType = 4, sceneIndex = 0;
+    public static int coin = 100000000, sumCoin = 0, engineType = 4, wheelType = 4, sceneIndex = 0, clearScene = 0;
     public static int[] wheelItemList = new int[3] { 0, 0, 0 }, engineItemList = new int[2] { 0, 0 };
 
     [SerializeField] private GameObject cheatShop;

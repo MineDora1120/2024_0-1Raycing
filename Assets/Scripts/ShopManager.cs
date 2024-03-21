@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
@@ -11,10 +12,11 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Sprite[] wheelSpr, engineSpr, buttonList;
     [SerializeField] private TextMeshProUGUI title, subtitle, priceTitle, userPrice, userEngine, userWheel;
 
+    private GameObject _status;
     private int _itemIndex, arrayIndex, _price;
-    private RectTransform _wheelButtonTransform, _engineButtonTransform;
+    private RectTransform _wheelButtonTransform, _engineButtonTransform, _statusRect;
     private string _name, _notice;
-    private bool changePriceText = false;
+    private bool changePriceText = false, isGameMenu = false;
 
     enum ButtonType
     {
@@ -36,6 +38,10 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _status = GameObject.FindWithTag("Respawn");
+        _statusRect = _status.GetComponent<RectTransform>();
+
+        isGameMenu = (SceneManager.GetActiveScene().buildIndex == 0);
         shopObj.SetActive(GameManager.isShopOpen);
         _buyButtonText = buyButton.GetComponentInChildren<TextMeshProUGUI>();
         _wheelButtonTransform = wheelButton.GetComponent<RectTransform>();
@@ -49,8 +55,12 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.isShopOpen) shopObj.SetActive(true);
-        else shopObj.SetActive(false);
+        shopObj.SetActive(GameManager.isShopOpen);
+        if(isGameMenu)
+        {
+            if (GameManager.isShopOpen) _statusRect.anchoredPosition = new Vector2(225f, -435);
+            else _statusRect.anchoredPosition = new Vector2(0, -435);
+        }
 
         _name = (arrayIndex == 0) ? wheelNamed[_itemIndex] : engineNamed[_itemIndex];
         _notice = (arrayIndex == 0) ? wheelNotice[_itemIndex] : engineNotice[_itemIndex];
@@ -74,7 +84,8 @@ public class ShopManager : MonoBehaviour
 
     void SubText()
     {
-        userPrice.text = "<sprite=4>" + (GameManager.coin + " + <color=red>" + GameManager.sumCoin);
+        if (!isGameMenu) userPrice.text = "<sprite=4>" + (GameManager.coin + " + <color=red>" + GameManager.sumCoin);
+        else userPrice.text = "<sprite=4>" + (GameManager.coin);
         userEngine.text = GameManager.engineType.ToString() + "기통 엔진 사용중";
         userWheel.text = (GameManager.wheelType == 4) ? "기본 바퀴 사용중" : wheelNamed[GameManager.wheelType] + " 사용중";
     }
