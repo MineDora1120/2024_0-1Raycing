@@ -37,10 +37,10 @@ public class ItemManager : MonoBehaviour
                     GameManager.sumCoin += 10000000;
                     break;
                 case 3:
-                    _rb.AddForce(_rbVec * 5000, ForceMode.Impulse);
+                    _rb.AddForce(_rbVec * 2500, ForceMode.Impulse);
                     break;
                 case 4:
-                    _rb.AddForce(_rbVec * 10000, ForceMode.Impulse);
+                    _rb.AddForce(_rbVec * 5000, ForceMode.Impulse);
                     break;
                 case 5:
                     GameManager.isShopOpen = true;

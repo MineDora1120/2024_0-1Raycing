@@ -97,9 +97,20 @@ public class JSONManager : MonoBehaviour
     //    }
     //}
 
+    public static void SortList()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            //_rankData[i] = _rankData[i].OrderBy(o => o.score).ToList();
+            _rankData[i] = _rankData[i].OrderByDescending(o => o.score).ToList();
+        }
+    }
+
     public static void SaveRank()
     {
         filePath = Application.persistentDataPath;
+        SortList();
+        
         for (int i = 0; i < 3; i++)
         {
             WriteData _tmpDB = new WriteData();
@@ -110,16 +121,6 @@ public class JSONManager : MonoBehaviour
                 _tmpDB.rank[j] = _rankData[i][j];
             }
             File.WriteAllText(filePath + fileName[i], JsonUtility.ToJson(_tmpDB));
-        }
-    }
-
-
-    void SortList()
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            //_rankData[i] = _rankData[i].OrderBy(o => o.score).ToList();
-            _rankData[i] = _rankData[i].OrderByDescending(o => o.score).ToList();
         }
     }
 }

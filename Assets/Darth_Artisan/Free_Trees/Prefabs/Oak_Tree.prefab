@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 2340482}
   - component: {fileID: 1678991457061496542}
   - component: {fileID: 4128244117769794413}
+  - component: {fileID: -3482604935388515634}
   m_Layer: 0
   m_Name: Oak_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &405256
 Transform:
@@ -135,3 +136,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2340482}
   m_Enabled: 1
+--- !u!208 &-3482604935388515634
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191266}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.978, y: 2.657, z: 1.4180001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.042000003, y: 2.647, z: 0.096}
+  m_TimeToStationary: 0.5

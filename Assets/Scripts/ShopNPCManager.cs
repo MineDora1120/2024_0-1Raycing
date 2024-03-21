@@ -29,6 +29,7 @@ public class ShopNPCManager : MonoBehaviour
             StartCoroutine(OnCarMove(other.gameObject));
             _playerRB.velocity = Vector3.zero;
         }
+        GameManager.isShopOpen = true;
     }
 
     private void OnTriggerStay(Collider other)
@@ -43,6 +44,7 @@ public class ShopNPCManager : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(OnBackMoveDown());
         }
+        GameManager.isShopOpen = false;
     }
 
     IEnumerator OnCarMove(GameObject _gm)
@@ -73,8 +75,7 @@ public class ShopNPCManager : MonoBehaviour
             _npc.transform.position += _direction * Time.deltaTime * 2; 
 
             _anim.SetBool("IsRun", true);
-            GameManager.isShopOpen = false;
-
+            
             yield return null;
         }
         _anim.SetBool("IsRun", false);
