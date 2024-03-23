@@ -6,7 +6,7 @@ using TMPro;
 
 public class MainManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _status, _rank, mainUi;
+    [SerializeField] private GameObject _status, _rank, _playMenu, mainUi;
     private TextMeshProUGUI _rankText;
 
     private bool isActiveWindow = false;
@@ -54,6 +54,10 @@ public class MainManager : MonoBehaviour
                 break;
             case 1:
                 GameManager.isShopOpen = true;
+                break;
+            case 2:
+                _playMenu.SetActive(true);
+                isActiveWindow = false;
                 break;
         }
     }
