@@ -6,43 +6,61 @@ using TMPro;
 
 public class MainManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _status, _rank;
+    [SerializeField] private GameObject _status, _rank, mainUi;
     private TextMeshProUGUI _rankText;
 
     private bool isActiveWindow = false;
+    private string[] _str = new string[3]{ "사막지형", "산악지형", "도시지역" };
     // Start is called before the first frame update
     void Start()
     {
-        isActiveWindow = false;
+        isActiveWindow = true;
+        _rankText = _rank.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _status.SetActive(!isActiveWindow);
+        _status.SetActive(isActiveWindow);
+        mainUi.SetActive(!GameManager.isShopOpen);
     }
 
-    //void RankText()
-    //{
-    //    string _tmpStr = "";
+    void RankText()
+    {
+        string _tmpStr = "<size=65><color=#3CB371>랭크 목록\r\n";
 
-    //    for(int i = 0; i < 3; i++)
-    //    {
-    //        _tmpStr += ""
-    //        for(int j = 0; j < 5; j++)
-    //        {
-    //            _tmpStr += 
-    //        }
-    //    }
-    //}
+        for (int i = 0; i < 3; i++)
+        {
+            _tmpStr += "<size=45><color=#4169E1>" + _str[i] + "\r\n";     
+            for (int j = 0; j < 5; j++)
+            {
+                _tmpStr += "<size=30><color=black>" + (j + 1 )+ ". " + ((JSONManager._rankData[i][j].score == 1) ? "등록되지 않음" : "시간: " + JSONManager._rankData[i][j].time +" ,점수 : " + JSONManager._rankData[i][j].score); 
+                _tmpStr += (j == 2) ? "\n": " ";
+            }
+            _tmpStr += "\r\n";
+        }
+        _rankText.text = _tmpStr;
+    }
 
     public void OnMenuButtonClick(int type)
     {
+        
         switch (type)
         {
             case 0:
                 _rank.SetActive(true);
+                RankText();
+                isActiveWindow = false;
+                break;
+            case 1:
+                GameManager.isShopOpen = true;
                 break;
         }
+    }
+
+    public void CancelButton()
+    {
+        isActiveWindow = true;
+        _rank.SetActive(false);
     }
 }
