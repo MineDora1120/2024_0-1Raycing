@@ -1,10 +1,14 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
     [SerializeField] private GameObject _status, _rank, _playMenu, mainUi;
     private TextMeshProUGUI _rankText;
+
+    [SerializeField] private Image _image;
+    [SerializeField] private Sprite[] _spr;
 
     private bool isActiveWindow = false;
     private int selectindex = 0;
@@ -68,16 +72,9 @@ public class MainManager : MonoBehaviour
     }
 
 
-
     public void ArrowClick(bool eekta)
     {
-        if (eekta)
-        {
-
-        }
-        else
-        {
-
-        }
+        if (eekta) selectindex++;
+        else selectindex--;
     }
 }
