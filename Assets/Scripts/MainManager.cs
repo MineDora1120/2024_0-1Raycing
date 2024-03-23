@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
@@ -10,10 +7,12 @@ public class MainManager : MonoBehaviour
     private TextMeshProUGUI _rankText;
 
     private bool isActiveWindow = false;
-    private string[] _str = new string[3]{ "사막지형", "산악지형", "도시지역" };
+    private int selectindex = 0;
+    private string[] _str = new string[3] { "사막지형", "산악지형", "도시지역" };
     // Start is called before the first frame update
     void Start()
     {
+        selectindex = 0;
         isActiveWindow = true;
         _rankText = _rank.GetComponentInChildren<TextMeshProUGUI>();
     }
@@ -31,11 +30,11 @@ public class MainManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            _tmpStr += "<size=45><color=#4169E1>" + _str[i] + "\r\n";     
+            _tmpStr += "<size=45><color=#4169E1>" + _str[i] + "\r\n";
             for (int j = 0; j < 5; j++)
             {
-                _tmpStr += "<size=30><color=black>" + (j + 1 )+ ". " + ((JSONManager._rankData[i][j].score == 1) ? "등록되지 않음" : "시간: " + JSONManager._rankData[i][j].time +" ,점수 : " + JSONManager._rankData[i][j].score); 
-                _tmpStr += (j == 2) ? "\n": " ";
+                _tmpStr += "<size=30><color=black>" + (j + 1) + ". " + ((JSONManager._rankData[i][j].score == 1) ? "등록되지 않음" : "시간: " + JSONManager._rankData[i][j].time + " ,점수 : " + JSONManager._rankData[i][j].score);
+                _tmpStr += (j == 2) ? "\n" : " ";
             }
             _tmpStr += "\r\n";
         }
@@ -44,7 +43,7 @@ public class MainManager : MonoBehaviour
 
     public void OnMenuButtonClick(int type)
     {
-        
+
         switch (type)
         {
             case 0:
@@ -66,5 +65,19 @@ public class MainManager : MonoBehaviour
     {
         isActiveWindow = true;
         _rank.SetActive(false);
+    }
+
+
+
+    public void ArrowClick(bool eekta)
+    {
+        if (eekta)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
