@@ -36,12 +36,15 @@ public class ShopManager : MonoBehaviour
 
     private TextMeshProUGUI _buyButtonText;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _status = GameObject.FindWithTag("Respawn");
-        _statusRect = _status.GetComponent<RectTransform>();
-
         isGameMenu = (SceneManager.GetActiveScene().buildIndex == 0);
+        if (isGameMenu)
+        {
+            _status = GameObject.FindWithTag("Respawn");
+            _statusRect = _status.GetComponent<RectTransform>();
+        }
+
         shopObj.SetActive(GameManager.isShopOpen);
         _buyButtonText = buyButton.GetComponentInChildren<TextMeshProUGUI>();
         _wheelButtonTransform = wheelButton.GetComponent<RectTransform>();
