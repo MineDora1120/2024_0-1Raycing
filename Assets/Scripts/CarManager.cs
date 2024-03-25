@@ -12,13 +12,15 @@ public class CarManager : MonoBehaviour
     private Quaternion _rotation;
     private float _tmpWheelDir;
     private Rigidbody _rb;
+
+    public float groundSpeed = 1;
     
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.centerOfMass = Vector3.zero;
-
+        groundSpeed = 1;
     }
 
     // Update is called once per frame
@@ -49,11 +51,11 @@ public class CarManager : MonoBehaviour
         for(int i = 0; i < 4; i++)
         {
             if (i < 2) wheelColliders[i].steerAngle =  wheelDir * Input.GetAxis("Horizontal");
-            else wheelColliders[i].motorTorque = GameManager.engineType * speed * Input.GetAxis("Vertical");
+            else wheelColliders[i].motorTorque = GameManager.engineType * speed * Input.GetAxis("Vertical") *  ((GameManager.sceneIndex != GameManager.wheelType + 1) ?  groundSpeed : 1);
         }
     }
 
-    void CarBreak(float value)
+    public void CarBreak(float value)
     {
         foreach (WheelCollider _wheel in wheelColliders)
         {
