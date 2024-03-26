@@ -35,6 +35,9 @@ public class MainManager : MonoBehaviour
         mainUi.SetActive(!GameManager.isShopOpen);
 
         if (_playMenu.activeSelf) StartMenuUpdate();
+
+        if (GameManager.clear[selectindex] == 0) _startArr.gameObject.SetActive(false);
+        else _startArr.gameObject.SetActive(true);
     }
 
     void StartMenuUpdate()
