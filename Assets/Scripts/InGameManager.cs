@@ -48,7 +48,7 @@ public class InGameManager : MonoBehaviour
     {
         for (int i = 0; i < 150; i++)
         {
-            _countText.transform.localScale = Vector2.Lerp(_vec, _countText.transform.localScale, Time.deltaTime * _scaleSpeed);
+            _countText.transform.localScale = Vector2.Lerp(_countText.transform.localScale, _vec, Time.deltaTime * _scaleSpeed);
             _timeText.text = (int)(_oneBornTime / 60) + ":" + (int)(_oneBornTime % 60);
             _percentBar.size = _oneBornTime / sceneCount[GameManager.sceneIndex - 1];
             yield return null;
