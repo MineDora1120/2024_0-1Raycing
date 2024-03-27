@@ -5,9 +5,11 @@ using UnityEngine;
 public class CarManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] wheelObjects;
-    [SerializeField] private WheelCollider[] wheelColliders;
+    [SerializeField] private WheelCollider[] wheelColliders;    
     [SerializeField] private float speed = 1000, wheelDir = 40;
+    [SerializeField] private AudioClip[] audioData;
 
+    private AudioSource _audioSource;
     private Vector3 _transform;
     private Quaternion _rotation;
     private float _tmpWheelDir;
@@ -18,6 +20,7 @@ public class CarManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody>();
         _rb.centerOfMass = Vector3.zero;
         groundSpeed = 1;
@@ -26,6 +29,7 @@ public class CarManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        _audioSource.pitch = Mathf.Clamp( _rb.velocity.magnitude / 10, 0.4f, 2f);
         if (GameManager.isShopOpen) CarBreak(20000);
         if (!InGameManager.isGameStart) _rb.velocity = Vector3.zero;
 

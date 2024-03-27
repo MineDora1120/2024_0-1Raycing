@@ -32,7 +32,7 @@ public class InGameManager : MonoBehaviour
 
         win = false;
         count = 5;
-        _scaleSpeed = 10f;
+        _scaleSpeed = 100f;
         isGameStart = false;
 
         if (retryMenu != null)
@@ -48,7 +48,7 @@ public class InGameManager : MonoBehaviour
     {
         for (int i = 0; i < 150; i++)
         {
-            _countText.transform.localScale = Vector2.Lerp(_countText.transform.localScale, _vec, Time.deltaTime * _scaleSpeed);
+            _countText.transform.localScale = Vector2.Lerp(_vec, _countText.transform.localScale, Time.deltaTime * _scaleSpeed);
             _timeText.text = (int)(_oneBornTime / 60) + ":" + (int)(_oneBornTime % 60);
             _percentBar.size = _oneBornTime / sceneCount[GameManager.sceneIndex - 1];
             yield return null;
@@ -170,7 +170,7 @@ public class InGameManager : MonoBehaviour
 
         for (i = 4; i > 0; i--)
         {
-            if (JSONManager._rankData[index][i].score >= score) break;
+            if (JSONManager._rankData[index][i].score <= score) break;
         }
 
         PlayerData _tmpDB = new PlayerData();
@@ -197,6 +197,8 @@ public class InGameManager : MonoBehaviour
             case 2:
                 if (win) StartCoroutine(SceneLoad(GameManager.sceneIndex+1));
                 else StartCoroutine(SceneLoad(GameManager.sceneIndex));
+                StartCoroutine(_sceneMananger.EndScene());
+
                 break;
         }
     }

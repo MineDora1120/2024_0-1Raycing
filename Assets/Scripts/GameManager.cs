@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool isShopOpen = false, isCheatShopOpen = false, isCheat = false;
+    public static bool isShopOpen = false, isCheatShopOpen = false, isCheat = false, isAudioOn = false;
     public static int coin = 100000000, sumCoin = 0, engineType = 4, wheelType = 4, sceneIndex = 0;
     public static int[] wheelItemList = new int[3] { 0, 0, 0 }, engineItemList = new int[2] { 0, 0 }, clear = new int[4] { 1,0,0, 0};
 
