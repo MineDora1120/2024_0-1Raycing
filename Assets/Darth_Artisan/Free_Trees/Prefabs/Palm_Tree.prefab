@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7769847783506979188}
   - component: {fileID: 3862774922573375161}
   - component: {fileID: 2203523737515943922}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Palm_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

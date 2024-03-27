@@ -32,7 +32,7 @@ public class InGameManager : MonoBehaviour
 
         win = false;
         count = 5;
-        _scaleSpeed = 50f;
+        _scaleSpeed = 10f;
         isGameStart = false;
 
         if (retryMenu != null)
@@ -126,7 +126,7 @@ public class InGameManager : MonoBehaviour
 
             GameManager.coin += GameManager.sumCoin;
             GameManager.sumCoin = 0;
-            GameManager.clear[GameManager.sceneIndex - 1] = 1;
+            GameManager.clear[GameManager.sceneIndex] = 1;
 
             StartCoroutine(EndMenu());
             SumRank();

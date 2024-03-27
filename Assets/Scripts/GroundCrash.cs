@@ -12,7 +12,7 @@ public class GroundCrash : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             _carManager.CarBreak(1000000);
-            _carManager.groundSpeed = 0.5f;
+            _carManager.groundSpeed = 0.1f;
         }
     }
     private void OnTriggerExit(Collider other)

@@ -13,7 +13,7 @@ public class CarManager : MonoBehaviour
     private float _tmpWheelDir;
     private Rigidbody _rb;
 
-    public float groundSpeed = 1;
+    [HideInInspector] public float groundSpeed = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -33,6 +33,8 @@ public class CarManager : MonoBehaviour
         RotateWheels();
         WheelObjRotate();
         if (GameManager.sceneIndex == GameManager.wheelType+1) _rb.AddForce(transform.TransformDirection(Vector3.forward) * GameManager.engineType * Input.GetAxis("Vertical") * 2, ForceMode.Impulse);
+    
+       if (Input.GetKeyDown(KeyCode.R)) transform.SetPositionAndRotation(transform.position + new Vector3(0, 10, 0), Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0));
     }
 
     void WheelObjRotate()
