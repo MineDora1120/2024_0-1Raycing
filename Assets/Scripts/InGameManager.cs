@@ -32,7 +32,7 @@ public class InGameManager : MonoBehaviour
 
         win = false;
         count = 5;
-        _scaleSpeed = 100f;
+        _scaleSpeed = 10f;
         isGameStart = false;
 
         if (retryMenu != null)
