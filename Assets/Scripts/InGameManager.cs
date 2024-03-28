@@ -31,7 +31,7 @@ public class InGameManager : MonoBehaviour
         _oneBornTime = sceneCount[GameManager.sceneIndex - 1];
 
         win = false;
-        count = 5;
+        count = 3;
         _scaleSpeed = 10f;
         isGameStart = false;
 
@@ -83,7 +83,7 @@ public class InGameManager : MonoBehaviour
     IEnumerator GameStart()
     {
         _scaleSpeed = 50;
-        for (count = 5; count >= 0; count--)
+        for (count = 3; count >= 0; count--)
         {
             _vec = new Vector3(1, 1);
             _countText.text = (count != 0) ? count.ToString() : "Go!";
