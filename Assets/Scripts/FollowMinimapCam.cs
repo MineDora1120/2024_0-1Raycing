@@ -19,6 +19,7 @@ public class FollowMinimapCam : MonoBehaviour
         //transform.localEulerAngles = new Vector3(90, 0, 270);
         //transform.position = new Vector3(transform.position.x, Ypos, _player.transform.position.z);
 
+        if (GameManager.sceneIndex == 4) return;
         _enemySphere.transform.SetPositionAndRotation(_enemy.transform.position + new Vector3(0, 20, 0), Quaternion.identity);
         _playerSphere.transform.SetPositionAndRotation(_player.transform.position + new Vector3(0, 20, 0), Quaternion.identity);
     }
